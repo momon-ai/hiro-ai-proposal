@@ -1,0 +1,807 @@
+<!-- ===================================================
+  製造業向け AIリテラシー教育サービス — クライアント提案書
+  作成: 井上裕滉（ヒロ）/ 監修: モモン
+  対象: 製造業 経営者・社長
+=================================================== -->
+<title>AI教育サービス — ご提案書</title>
+<style>
+/* ── リセット・ベース ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:      #1A1F2E;
+  --ink2:     #3D4560;
+  --muted:    #6B7494;
+  --line:     #DDE2EE;
+  --bg:       #F7F8FC;
+  --white:    #FFFFFF;
+  --accent:   #1A5FD4;
+  --accent-l: #EBF1FB;
+  --gold:     #C8881A;
+  --gold-l:   #FDF5E6;
+  --green:    #1A7A4A;
+  --green-l:  #EBF7F0;
+  --red:      #C0392B;
+
+  --page-w:  720px;
+  --r:       6px;
+}
+
+html { font-size: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+body {
+  font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.75;
+}
+
+/* ── ページ幅 ── */
+.page {
+  max-width: var(--page-w);
+  margin: 0 auto;
+  background: var(--white);
+  box-shadow: 0 2px 24px rgba(0,0,0,.08);
+}
+
+/* ── セクション共通 ── */
+section { padding: 48px 56px; border-bottom: 1px solid var(--line); }
+section:last-child { border-bottom: none; }
+
+/* ── タイポグラフィ ── */
+h1 { font-size: 30px; font-weight: 800; line-height: 1.25; letter-spacing: -.01em; }
+h2 { font-size: 20px; font-weight: 800; line-height: 1.3; margin-bottom: 20px; }
+h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+p  { font-size: 14px; color: var(--ink2); margin-bottom: 12px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.section-lead {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 28px;
+  line-height: 1.8;
+}
+
+/* ── カバー ── */
+.cover {
+  background: linear-gradient(160deg, #0F2248 0%, #1A3A6B 60%, #1A5FD4 100%);
+  color: #fff;
+  padding: 64px 56px 56px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -40px;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.03);
+}
+.cover-tag {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 20px;
+  font-size: 11px;
+  letter-spacing: .12em;
+  padding: 4px 14px;
+  margin-bottom: 28px;
+  color: rgba(255,255,255,.85);
+}
+.cover h1 { color: #fff; margin-bottom: 16px; }
+.cover h1 span { color: #7DB8FF; }
+.cover-sub { font-size: 15px; color: rgba(255,255,255,.75); line-height: 1.7; margin-bottom: 36px; }
+.cover-meta {
+  display: flex;
+  gap: 32px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,.2);
+}
+.cover-meta-item { display: flex; flex-direction: column; gap: 2px; }
+.cover-meta-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+.cover-meta-val { font-size: 13px; font-weight: 600; color: #fff; }
+
+/* ── イントロ（手紙形式） ── */
+.intro-letter {
+  font-size: 14px;
+  line-height: 2;
+  color: var(--ink2);
+}
+.intro-signature {
+  margin-top: 28px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.intro-signature small { display: block; font-size: 12px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+
+/* ── 課題ボックス ── */
+.problem-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.problem-item {
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+.problem-item::before {
+  content: '"';
+  font-size: 24px;
+  font-family: Georgia, serif;
+  color: var(--accent);
+  line-height: 0;
+  vertical-align: -.4em;
+  margin-right: 4px;
+}
+
+/* ── 数字ハイライト ── */
+.stat-row { display: flex; gap: 16px; margin: 24px 0; }
+.stat-box {
+  flex: 1;
+  background: var(--accent-l);
+  border-radius: var(--r);
+  padding: 18px 16px;
+  text-align: center;
+}
+.stat-num {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  display: block;
+}
+.stat-label { font-size: 12px; color: var(--ink2); margin-top: 6px; line-height: 1.5; }
+
+/* ── 強調コールアウト ── */
+.callout {
+  background: var(--gold-l);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 16px 20px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold);
+  margin: 24px 0;
+  line-height: 1.5;
+}
+.callout span { font-size: 13px; font-weight: 400; color: var(--ink2); display: block; margin-top: 4px; }
+
+/* ── コース一覧 ── */
+.course-list { display: flex; flex-direction: column; gap: 16px; }
+.course-card {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.course-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.course-badge {
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  padding: 3px 10px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+.course-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+.course-body { padding: 16px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+.course-field label { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 3px; }
+.course-field span { font-size: 13px; color: var(--ink2); line-height: 1.5; }
+.course-price {
+  grid-column: 1 / -1;
+  background: var(--accent-l);
+  border-radius: var(--r);
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+.course-price-label { font-size: 11px; color: var(--accent); font-weight: 600; }
+.course-price-val { font-size: 16px; font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+/* ── おすすめパック ── */
+.pack-box {
+  border: 2px solid var(--accent);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-top: 24px;
+}
+.pack-header {
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pack-name { font-size: 15px; font-weight: 800; }
+.pack-tag { font-size: 11px; background: rgba(255,255,255,.2); border-radius: 20px; padding: 3px 10px; letter-spacing: .08em; }
+.pack-body { padding: 24px; }
+.pack-includes { margin-bottom: 16px; }
+.pack-includes li { font-size: 13px; color: var(--ink2); padding: 4px 0; padding-left: 18px; position: relative; line-height: 1.6; }
+.pack-includes li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.pack-price-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.pack-orig { font-size: 14px; color: var(--muted); text-decoration: line-through; font-variant-numeric: tabular-nums; }
+.pack-price { font-size: 32px; font-weight: 900; color: var(--accent); font-variant-numeric: tabular-nums; line-height: 1; }
+.pack-unit { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+.pack-note { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.7; }
+
+/* ── 補助金 ── */
+.subsidy-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.subsidy-table th {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 2px solid var(--line);
+}
+.subsidy-table td { padding: 12px 12px; border-bottom: 1px solid var(--line); color: var(--ink2); vertical-align: top; }
+.subsidy-table td:last-child { font-weight: 800; color: var(--green); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.subsidy-table tr:last-child td { border-bottom: none; }
+
+.subsidy-cta {
+  background: var(--green-l);
+  border-left: 4px solid var(--green);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 14px 18px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green);
+}
+.subsidy-cta small { display: block; font-size: 12px; font-weight: 400; color: var(--ink2); margin-top: 4px; line-height: 1.7; }
+
+/* ── 比較表 ── */
+.compare-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 20px; }
+.compare-table th {
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  border-bottom: 2px solid var(--line);
+}
+.compare-table th:first-child { color: var(--muted); }
+.compare-table th:last-child { background: var(--accent); color: #fff; border-radius: var(--r) var(--r) 0 0; text-align: center; }
+.compare-table td { padding: 11px 14px; border-bottom: 1px solid var(--line); color: var(--ink2); vertical-align: top; line-height: 1.6; }
+.compare-table td:last-child { background: var(--accent-l); text-align: center; font-weight: 600; color: var(--accent); }
+.compare-table tr:last-child td { border-bottom: none; }
+.ico-check { color: var(--green); font-size: 16px; }
+.ico-cross { color: var(--red); font-size: 16px; }
+
+/* ── ロードマップ ── */
+.roadmap { display: flex; flex-direction: column; gap: 0; margin-top: 20px; position: relative; }
+.roadmap::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  background: var(--line);
+}
+.rm-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 16px 0;
+  position: relative;
+}
+.rm-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.rm-step:nth-child(2) .rm-dot { background: var(--gold); }
+.rm-step:nth-child(3) .rm-dot { background: var(--green); }
+.rm-content { padding-top: 8px; }
+.rm-period { font-size: 11px; color: var(--muted); letter-spacing: .06em; margin-bottom: 2px; }
+.rm-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.rm-items { list-style: none; }
+.rm-items li { font-size: 13px; color: var(--ink2); padding: 2px 0; padding-left: 14px; position: relative; }
+.rm-items li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
+
+/* ── 収益シミュレーション ── */
+.sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+.sim-item {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 16px;
+}
+.sim-item.highlight {
+  border-color: var(--gold);
+  background: var(--gold-l);
+}
+.sim-label { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+.sim-val { font-size: 22px; font-weight: 900; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1; }
+.sim-item.highlight .sim-val { color: var(--gold); }
+.sim-note { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+/* ── 次のアクション ── */
+.action-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+.action-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--white);
+}
+.action-num {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.action-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.action-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ── フッター ── */
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,.5);
+  padding: 24px 56px;
+  font-size: 11px;
+  line-height: 1.7;
+  text-align: center;
+  letter-spacing: .04em;
+}
+footer strong { color: rgba(255,255,255,.85); }
+
+/* ── 印刷用 ── */
+@media print {
+  body { background: none; }
+  .page { box-shadow: none; max-width: 100%; }
+  section { padding: 36px 48px; }
+  .cover { padding: 48px; }
+  .stat-row { break-inside: avoid; }
+  .course-card { break-inside: avoid; }
+  .pack-box { break-inside: avoid; }
+}
+
+@media (max-width: 600px) {
+  section { padding: 36px 24px; }
+  .cover { padding: 48px 24px 40px; }
+  .course-body { grid-template-columns: 1fr; }
+  .sim-grid { grid-template-columns: 1fr; }
+  .cover-meta { flex-direction: column; gap: 16px; }
+  footer { padding: 20px 24px; }
+}
+</style>
+
+<div class="page">
+
+  <!-- ── カバー ── -->
+  <section class="cover" style="border-bottom:none">
+    <div class="cover-tag">Confidential Proposal</div>
+    <h1>製造業の現場から、<br><span>AIを「使えるチーム」へ。</span></h1>
+    <p class="cover-sub">
+      従業員のリテラシー不足で止まっていたDXを、<br>
+      現場の言葉で・最短ルートで・定着まで支援します。
+    </p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">提案者</span>
+        <span class="cover-meta-val">井上 裕滉（ヒロ）</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">サービス名</span>
+        <span class="cover-meta-val">製造業向け AI教育プログラム</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">作成日</span>
+        <span class="cover-meta-val">2026年7月</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ごあいさつ ── -->
+  <section>
+    <div class="eyebrow">はじめに</div>
+    <div class="intro-letter">
+      <p>
+        この度は、製造業向けAIリテラシー教育サービスについてご提案の機会をいただき、誠にありがとうございます。
+      </p>
+      <p>
+        私自身、車部品を製造する機械を扱う会社を経営する中で、「AIやDXを進めたいが、現場のベテランが拒否する」「社長だけ前向きで現場がついてこない」という場面を何度も経験してきました。
+      </p>
+      <p>
+        このプログラムは、そうした<strong>製造業の現場にいた人間だからこそ</strong>設計できた内容です。AI専門家が「お勉強」を教えるのではなく、<strong>明日から現場で使える、を最短で届ける</strong>ことを一番大切にしています。
+      </p>
+      <p>
+        ぜひ、御社の状況と照らし合わせながらご覧ください。
+      </p>
+    </div>
+    <div class="intro-signature">
+      井上 裕滉
+      <small>製造業 AI教育プログラム／プロデューサー</small>
+    </div>
+  </section>
+
+  <!-- ── 課題 ── -->
+  <section>
+    <div class="eyebrow">The Problem</div>
+    <h2>「AIを使おう」と思っているのに、<br>なぜ止まってしまうのか</h2>
+    <p class="section-lead">
+      現場の声を聞くと、どの製造業でも同じ壁があることがわかります。
+    </p>
+
+    <div class="problem-list">
+      <div class="problem-item">ChatGPTって聞くけど、工場で何に使えるの？</div>
+      <div class="problem-item">ベテランが拒否して、導入したシステムが結局使われていない</div>
+      <div class="problem-item">社長は前向きだけど、現場がついてこない</div>
+      <div class="problem-item">AIを使わないことが最大のリスクと聞いたが、うちには無理な気がする</div>
+    </div>
+
+    <div class="stat-row" style="margin-top:28px">
+      <div class="stat-box">
+        <span class="stat-num">約12%</span>
+        <div class="stat-label">中小企業のAI導入率<br><span style="font-size:11px;font-weight:400">（中小企業AI導入実態調査2026）</span></div>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">62%</span>
+        <div class="stat-label">「何から始めればいいか<br>わからない」と答えた企業<br><span style="font-size:11px;font-weight:400">（同調査・最大障壁）</span></div>
+      </div>
+      <div class="stat-box" style="background:var(--gold-l)">
+        <span class="stat-num" style="color:var(--gold)">85%</span>
+        <div class="stat-label">DX人材が「不足」と<br>回答した日本企業<br><span style="font-size:11px;font-weight:400">（IPA DX動向2025）</span></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      「使い方がわからない」は直せます。問題は教え方と順番だけです。
+      <span>ITが苦手なベテランでも、正しいステップで教えれば必ず使えるようになります。</span>
+    </div>
+  </section>
+
+  <!-- ── サービスの特徴 ── -->
+  <section>
+    <div class="eyebrow">Why Us</div>
+    <h2>他の研修と、何が違うのか</h2>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="width:44%">比較ポイント</th>
+          <th style="width:28%">一般的な研修会社</th>
+          <th style="width:28%">このプログラム</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>内容・言語</td>
+          <td>オフィスワーカー向け汎用</td>
+          <td><span class="ico-check">✓</span> 製造現場の文脈・用語で構成</td>
+        </tr>
+        <tr>
+          <td>担当者の現場経験</td>
+          <td><span class="ico-cross">✕</span> なし（AI専門家のみ）</td>
+          <td><span class="ico-check">✓</span> 製造業経営者が設計・進行</td>
+        </tr>
+        <tr>
+          <td>最初の研修で体験できること</td>
+          <td>概念説明・スライド視聴</td>
+          <td><span class="ico-check">✓</span> 「AIが使えた」体験を1回目で</td>
+        </tr>
+        <tr>
+          <td>研修後のフォロー</td>
+          <td><span class="ico-cross">✕</span> なし（研修して終わり）</td>
+          <td><span class="ico-check">✓</span> 定着まで月次フォロー</td>
+        </tr>
+        <tr>
+          <td>補助金の活用サポート</td>
+          <td><span class="ico-cross">✕</span> 案内なし</td>
+          <td><span class="ico-check">✓</span> 最大75%削減まで一緒に申請</td>
+        </tr>
+        <tr>
+          <td>対外的なブランディング</td>
+          <td><span class="ico-cross">✕</span> 研修会社との付き合いは社内のみ</td>
+          <td><span class="ico-check">✓</span> 「AI顧問を抱えている会社」として対外アピール可</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── サービス内容 ── -->
+  <section>
+    <div class="eyebrow">Service Plan</div>
+    <h2>シンプルな1プラン — 毎月来て、一緒に育てていく</h2>
+    <p class="section-lead">
+      複雑なコース設計はしません。毎月1回、社員全員へ講義を届ける。それだけで御社のAIリテラシーは確実に上がります。
+      契約期間中は<strong>AI顧問</strong>として常時帯同。「うちにはAI顧問がいる」を取引先・採用・銀行への対外的なブランディングにもご活用いただけます。
+    </p>
+
+    <div class="pack-box" style="margin-top:0">
+      <div class="pack-header">
+        <div class="pack-name">月1回 社員向け AI講義プラン</div>
+        <div class="pack-tag">3ヶ月〜 月額契約</div>
+      </div>
+      <div class="pack-body">
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px 32px;margin-bottom:24px">
+          <div>
+            <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">対象</div>
+            <div style="font-size:13px;color:var(--ink2);line-height:1.6">御社の社員（全員参加推奨）<br>IT苦手・ベテランも歓迎</div>
+          </div>
+          <div>
+            <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">頻度・形式</div>
+            <div style="font-size:13px;color:var(--ink2);line-height:1.6">月1回 × 約2時間<br>対面（御社にお伺い）/ オンライン</div>
+          </div>
+          <div>
+            <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">講義内容（毎月更新）</div>
+            <div style="font-size:13px;color:var(--ink2);line-height:1.6">最新AI動向 × 製造現場で今すぐ使えるテーマ。「今月の課題」に合わせてカスタマイズ対応</div>
+          </div>
+          <div>
+            <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">サポート</div>
+            <div style="font-size:13px;color:var(--ink2);line-height:1.6">「AIをこういう場面で使いたい」という相談は無料でOK<br><span style="font-size:11px;color:var(--muted)">※内容によっては別途お見積もり</span></div>
+          </div>
+        </div>
+
+        <div class="pack-price-row">
+          <div style="width:100%">
+            <div style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap">
+              <span class="pack-price">月20万円</span>
+              <span class="pack-unit">（税別）/ 社</span>
+              <div style="background:var(--green-l);border:1px solid var(--green);border-radius:4px;padding:4px 12px;font-size:12px;font-weight:700;color:var(--green)">補助金後 実質 月5万円〜</div>
+            </div>
+            <div class="pack-note" style="margin-top:12px">
+              ※人材開発支援助成金（リスキリング訓練コース）適用で最大75%削減。月20万円 → 実質月5万円程度になる場合があります。<br>
+              ※補助金の申請サポートもこちらで対応します。手間をかけずに活用できます。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;padding:16px 20px;background:var(--bg);border-radius:var(--r);border:1px solid var(--line)">
+      <div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">講義テーマ例（毎月更新・現場に合わせて調整）</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="font-size:12px;background:var(--accent-l);color:var(--accent);padding:4px 12px;border-radius:20px">ChatGPTで報告書を10分で仕上げる</span>
+        <span style="font-size:12px;background:var(--accent-l);color:var(--accent);padding:4px 12px;border-radius:20px">情報漏洩させないAIの使い方</span>
+        <span style="font-size:12px;background:var(--accent-l);color:var(--accent);padding:4px 12px;border-radius:20px">現場の「困った」をAIで解決する方法</span>
+        <span style="font-size:12px;background:var(--accent-l);color:var(--accent);padding:4px 12px;border-radius:20px">ベテランでも使えるAIツール入門</span>
+        <span style="font-size:12px;background:var(--accent-l);color:var(--accent);padding:4px 12px;border-radius:20px">AI時代の品質管理・チェックリスト活用</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 補助金 ── -->
+  <section>
+    <div class="eyebrow">Subsidy Support</div>
+    <h2>補助金を使えば、<br>実質負担は「4分の1以下」になります</h2>
+    <p class="section-lead">
+      このプログラムは複数の国・自治体の補助金・助成金が活用できます。申請サポートもセットで対応しますので、手間をかけずに最大限の削減が可能です。
+    </p>
+
+    <table class="subsidy-table">
+      <thead>
+        <tr>
+          <th style="width:44%">制度名</th>
+          <th>対象費用</th>
+          <th>補助率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>人材開発支援助成金</strong><br><small style="color:var(--muted)">リスキリング訓練コース</small></td>
+          <td>従業員研修費用</td>
+          <td>最大 75%</td>
+        </tr>
+        <tr>
+          <td><strong>IT導入補助金</strong></td>
+          <td>AIツール導入費用</td>
+          <td>最大 80%</td>
+        </tr>
+        <tr>
+          <td><strong>各都道府県 中小企業DX補助金</strong></td>
+          <td>研修・システム費用</td>
+          <td>要確認</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="subsidy-cta">
+      補助金を使えば、月20万円が実質 月5万円程度になる場合があります。
+      <small>申請に必要な書類の準備・専門家（社労士）との連携までサポートします。「補助金申請が面倒で踏み出せない」という場合もお気軽にご相談ください。</small>
+    </div>
+  </section>
+
+  <!-- ── ロードマップ ── */
+  <section>
+    <div class="eyebrow">How It Works</div>
+    <h2>導入から定着まで、3つのフェーズで進めます</h2>
+
+    <div class="roadmap">
+      <div class="rm-step">
+        <div class="rm-dot">1</div>
+        <div class="rm-content">
+          <div class="rm-period">第1フェーズ ／ 最初の1ヶ月</div>
+          <div class="rm-title">準備・すり合わせ</div>
+          <ul class="rm-items">
+            <li>御社の現状・課題・目標をヒアリング</li>
+            <li>カリキュラムの内容を御社に合わせてカスタマイズ</li>
+            <li>補助金申請フローの確認・準備</li>
+            <li>研修日程の調整・会場設定（または環境確認）</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-dot">2</div>
+        <div class="rm-content">
+          <div class="rm-period">第2フェーズ ／ 1ヶ月目〜（月次継続）</div>
+          <div class="rm-title">月1回 講義スタート</div>
+          <ul class="rm-items">
+            <li>社員向け AI講義（月1回 × 約2時間）を実施</li>
+            <li>毎月テーマを更新 — 現場の課題・最新AI動向を反映</li>
+            <li>参加者全員が「今日から使える」体験を持ち帰る設計</li>
+            <li>受講後アンケート → 翌月のテーマに反映</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-dot">3</div>
+        <div class="rm-content">
+          <div class="rm-period">第3フェーズ ／ 継続中（月内随時）</div>
+          <div class="rm-title">相談対応・定着サポート</div>
+          <ul class="rm-items">
+            <li>「こういう場面でAIを使いたい」という相談を月内で受け付け</li>
+            <li>カスタムニーズ（特定業務への組み込み等）があれば内容を確認し別途見積もり</li>
+            <li>月を重ねるごとに現場のAI活用が自走できる状態へ</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── よくある不安 ── -->
+  <section>
+    <div class="eyebrow">FAQ</div>
+    <h2>よくいただく不安・質問</h2>
+
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:20px">
+
+      <div style="border:1px solid var(--line);border-radius:var(--r);overflow:hidden">
+        <div style="background:var(--bg);padding:12px 20px;font-size:14px;font-weight:700;color:var(--accent)">
+          Q. IT苦手なベテラン社員でも大丈夫ですか？
+        </div>
+        <div style="padding:14px 20px;font-size:13px;color:var(--ink2);line-height:1.8;border-top:1px solid var(--line)">
+          大丈夫です。このプログラムはIT苦手な方を前提に設計しています。スマホ操作ができる方であれば問題なく参加できます。「難しい説明はしない。とにかく触ってみる」が最初のステップです。
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--line);border-radius:var(--r);overflow:hidden">
+        <div style="background:var(--bg);padding:12px 20px;font-size:14px;font-weight:700;color:var(--accent)">
+          Q. 情報漏洩が怖いのですが、セキュリティは大丈夫ですか？
+        </div>
+        <div style="padding:14px 20px;font-size:13px;color:var(--ink2);line-height:1.8;border-top:1px solid var(--line)">
+          ビギナーズ研修の中で「AIに入力してはいけない情報（機密情報・個人情報）」を明確に教えます。「知らないから使えない」ではなく「正しく知って、安全に使う」が目標です。
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--line);border-radius:var(--r);overflow:hidden">
+        <div style="background:var(--bg);padding:12px 20px;font-size:14px;font-weight:700;color:var(--accent)">
+          Q. 研修が終わったら使わなくなるのでは？
+        </div>
+        <div style="padding:14px 20px;font-size:13px;color:var(--ink2);line-height:1.8;border-top:1px solid var(--line)">
+          研修後30日間のChatworkサポートが標準でついています。「こういう場面で使いたいがどうすれば？」という質問にリアルタイムで答えることで、実務での定着を支援します。
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--line);border-radius:var(--r);overflow:hidden">
+        <div style="background:var(--bg);padding:12px 20px;font-size:14px;font-weight:700;color:var(--accent)">
+          Q. オンラインですか？対面ですか？
+        </div>
+        <div style="padding:14px 20px;font-size:13px;color:var(--ink2);line-height:1.8;border-top:1px solid var(--line)">
+          対面（御社にお伺い）・オンラインいずれも対応できます。実際に手を動かしていただく研修のため、対面での実施を推奨していますが、御社の状況に合わせて柔軟に対応します。
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--line);border-radius:var(--r);overflow:hidden">
+        <div style="background:var(--bg);padding:12px 20px;font-size:14px;font-weight:700;color:var(--accent)">
+          Q. 講義以外のカスタム依頼はできますか？
+        </div>
+        <div style="padding:14px 20px;font-size:13px;color:var(--ink2);line-height:1.8;border-top:1px solid var(--line)">
+          はい、対応できます。「この業務にAIを組み込みたい」「特定のツールの使い方を教えてほしい」など、月1回の講義に収まらない内容はヒアリングのうえで別途お見積もりします。まずは相談ベースでお気軽にどうぞ。
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 次のアクション ── -->
+  <section>
+    <div class="eyebrow">Next Steps</div>
+    <h2>では、ここから始めましょう</h2>
+    <p class="section-lead">
+      今日の商談を、次のアクションに直結させます。決断から初回講義まで、最短3ステップです。
+    </p>
+
+    <div class="action-list">
+      <div class="action-item">
+        <div class="action-num">01</div>
+        <div>
+          <div class="action-title">ご契約の合意</div>
+          <div class="action-body">今日ご決断いただければ、最短来月からスタート可能です。補助金申請のサポートもこの時点で並行して進めます。</div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">02</div>
+        <div>
+          <div class="action-title">初回カリキュラムの調整</div>
+          <div class="action-body">御社の現場・課題・社員構成に合わせて、第1回のテーマと進め方をすり合わせます。「何を最初に教えるか」はこちらで設計します。</div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">03</div>
+        <div>
+          <div class="action-title">初回講義スタート</div>
+          <div class="action-body">ご契約後1ヶ月以内に第1回を実施。「AIが怖くない」から始め、翌月以降も月1回のペースで継続します。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:28px">
+      今日、この場でお決めいただけますか？
+      <span>「うちの現場でも使えるのか？」「補助金はどう申請すれば？」— 気になることがあれば、今ここで全部お答えします。</span>
+    </div>
+  </section>
+
+  <!-- ── フッター ── -->
+  <footer>
+    <strong>製造業向け AI教育プログラム</strong><br>
+    プロデューサー: 井上 裕滉 ／ コンテンツ監修: モモン<br>
+    本資料の内容は提案先企業様限りの使用に限ります。無断転載・配布はご遠慮ください。
+  </footer>
+
+</div>
